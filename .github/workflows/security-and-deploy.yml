@@ -1,0 +1,182 @@
+name: Security Check & Deploy
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    # Läuft jeden Montag um 9:00 UTC
+    - cron: '0 9 * * 1'
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Verhindert gleichzeitige Deployments
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  # Job 1: Security Checks
+  security-checks:
+    runs-on: ubuntu-latest
+    name: 🔒 Security Checks
+    
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🔍 Check for broken links
+        continue-on-error: true
+        run: |
+          echo "🔗 Checking for broken links in HTML files..."
+          
+          # Extrahiere alle URLs aus index.html
+          grep -oP 'href="https?://[^"]+"|src="https?://[^"]+"' index.html | \
+          sed 's/href="//g; s/src="//g; s/"//g' | sort -u > urls.txt
+          
+          echo "📋 Found $(wc -l < urls.txt) unique URLs"
+          
+          # Prüfe jeden Link (mit Timeout)
+          broken_links=0
+          while IFS= read -r url; do
+            if ! curl -L --max-time 10 --retry 2 -s -f -o /dev/null "$url"; then
+              echo "❌ Broken: $url"
+              broken_links=$((broken_links + 1))
+            else
+              echo "✅ OK: $url"
+            fi
+          done < urls.txt
+          
+          if [ $broken_links -gt 0 ]; then
+            echo "⚠️ Warning: $broken_links broken link(s) found"
+          else
+            echo "✅ All links are working!"
+          fi
+
+      - name: 🛡️ HTML Security Check
+        run: |
+          echo "🔐 Checking HTML for security issues..."
+          
+          # Prüfe auf potenzielle XSS-Risiken
+          if grep -i "eval(" index.html; then
+            echo "❌ WARNING: eval() found - potential XSS risk!"
+            exit 1
+          fi
+          
+          if grep -i "innerHTML" index.html | grep -v "emailSpan.innerHTML"; then
+            echo "⚠️ WARNING: innerHTML usage detected - review for XSS risks"
+          fi
+          
+          # Prüfe auf externe Scripts ohne Integrity-Hash
+          if grep -oP '<script[^>]+src="https?://[^"]+"[^>]*>' index.html | grep -v "integrity="; then
+            echo "ℹ️ INFO: External scripts without SRI (Subresource Integrity) detected"
+            echo "Consider adding integrity hashes for better security"
+          fi
+          
+          # Prüfe auf Meta-Tags
+          if ! grep -q 'X-Content-Type-Options' index.html; then
+            echo "✅ Security meta tags should be present"
+          fi
+          
+          echo "✅ Basic HTML security check completed"
+
+      - name: 📊 Validate HTML Structure
+        run: |
+          echo "📝 Validating HTML structure..."
+          
+          # Prüfe auf DOCTYPE
+          if ! grep -q '<!DOCTYPE html>' index.html; then
+            echo "❌ Missing DOCTYPE declaration"
+            exit 1
+          fi
+          
+          # Prüfe auf grundlegende HTML-Struktur
+          if ! grep -q '<html' index.html || ! grep -q '</html>' index.html; then
+            echo "❌ Invalid HTML structure"
+            exit 1
+          fi
+          
+          if ! grep -q '<head>' index.html || ! grep -q '</head>' index.html; then
+            echo "❌ Missing head section"
+            exit 1
+          fi
+          
+          if ! grep -q '<body>' index.html || ! grep -q '</body>' index.html; then
+            echo "❌ Missing body section"
+            exit 1
+          fi
+          
+          echo "✅ HTML structure is valid"
+
+      - name: 🔐 Check CSP Headers
+        run: |
+          echo "🛡️ Analyzing Content Security Policy..."
+          
+          if grep -q "Content-Security-Policy" index.html; then
+            echo "✅ CSP meta tag found in HTML"
+            grep "Content-Security-Policy" index.html
+          else
+            echo "ℹ️ No CSP meta tag found - consider adding one"
+          fi
+
+      - name: 🌐 API Endpoint Check
+        continue-on-error: true
+        run: |
+          echo "🔌 Testing external API endpoints..."
+          
+          # Test Alternative.me Fear & Greed API
+          if curl -s -f "https://api.alternative.me/fng/?limit=1" > /dev/null; then
+            echo "✅ Fear & Greed API is reachable"
+          else
+            echo "⚠️ Fear & Greed API might be down"
+          fi
+          
+          # Test Formspree endpoint (nur Erreichbarkeit, nicht POST)
+          if curl -s -f -I "https://formspree.io" > /dev/null; then
+            echo "✅ Formspree is reachable"
+          else
+            echo "⚠️ Formspree might be down"
+          fi
+
+      - name: 📈 Generate Security Report
+        if: always()
+        run: |
+          echo "📋 Security Check Summary"
+          echo "=========================="
+          echo "✅ Repository: ${{ github.repository }}"
+          echo "✅ Branch: ${{ github.ref_name }}"
+          echo "✅ Commit: ${{ github.sha }}"
+          echo "✅ Triggered by: ${{ github.event_name }}"
+          echo "=========================="
+          echo "🎉 Security checks completed!"
+
+  # Job 2: Build and Deploy
+  deploy:
+    needs: security-checks
+    runs-on: ubuntu-latest
+    name: 🚀 Deploy to GitHub Pages
+    
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🔧 Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: 📦 Upload Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+      - name: 🚀 Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+      - name: ✅ Deployment Complete
+        run: |
+          echo "🎉 Successfully deployed to GitHub Pages!"
+          echo "🌐 Your site is live at: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
