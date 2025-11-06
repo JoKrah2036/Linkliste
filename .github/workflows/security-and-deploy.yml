@@ -43,10 +43,14 @@ jobs:
           # Prüfe jeden Link (mit Timeout)
           broken_links=0
           while IFS= read -r url; do
-            if ! curl -L --max-time 10 --retry 2 -s -f -o /dev/null "$url"; then
-              echo "❌ Broken: $url"
-              broken_links=$((broken_links + 1))
-            else
+       # Job 2: Build and Deploy
+  deploy:
+    needs: security-checks
+    runs-on: ubuntu-latest
+    name: 🚀 Deploy to GitHub Pages
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
               echo "✅ OK: $url"
             fi
           done < urls.txt
