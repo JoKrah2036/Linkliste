@@ -23,10 +23,10 @@ jobs:
       - name: 🔍 Security Headers Check
         id: security-headers
         run: |
-          echo "🔍 Prüfe Security Headers für jokrah2036.github.io/Linkliste..."
+          echo "🔍 Prüfe Security Headers für www.tipps.coreho.com..."
           
           # SecurityHeaders.com API abfragen
-          RESPONSE=$(curl -s "https://api.securityheaders.com/?url=https://jokrah2036.github.io/Linkliste/")
+          RESPONSE=$(curl -s "https://api.securityheaders.com/?url=https://www.tipps.coreho.com")
           
           # Score extrahieren (vereinfacht - passt ggf. an)
           echo "response=$RESPONSE" >> $GITHUB_OUTPUT
@@ -45,7 +45,7 @@ jobs:
           
           # Scan initiieren
           SCAN_RESULT=$(curl -s -X POST \
-            "https://http-observatory.security.mozilla.org/api/v1/analyze?host=jokrah2036.github.io" \
+            "https://http-observatory.security.mozilla.org/api/v1/analyze?host=www.tipps.coreho.com" \
             | jq -r '.')
           
           echo "$SCAN_RESULT"
@@ -56,7 +56,7 @@ jobs:
           # Warte auf Scan-Ergebnis (max 60 Sekunden)
           for i in {1..12}; do
             sleep 5
-            RESULT=$(curl -s "https://http-observatory.security.mozilla.org/api/v1/analyze?host=jokrah2036.github.io")
+            RESULT=$(curl -s "https://http-observatory.security.mozilla.org/api/v1/analyze?host=www.tipps.coreho.com")
             STATE=$(echo $RESULT | jq -r '.state')
             
             echo "Status: $STATE"
@@ -92,7 +92,7 @@ jobs:
           echo "🔐 SSL/TLS Konfiguration prüfen..."
           
           # Prüfe SSL-Zertifikat
-          echo | openssl s_client -connect jokrah2036.github.io:443 -servername jokrah2036.github.io 2>/dev/null | \
+          echo | openssl s_client -connect www.tipps.coreho.com:443 -servername www.tipps.coreho.com 2>/dev/null | \
             openssl x509 -noout -dates
           
           echo "✅ SSL Check abgeschlossen"
@@ -101,7 +101,7 @@ jobs:
         run: |
           echo "🌐 Prüfe ob Website erreichbar ist..."
           
-          STATUS_CODE=$(curl -s -o /dev/null -w "%{http_code}" "https://jokrah2036.github.io/Linkliste/")
+          STATUS_CODE=$(curl -s -o /dev/null -w "%{http_code}" "https://www.tipps.coreho.com")
           
           if [ "$STATUS_CODE" = "200" ]; then
             echo "✅ Website ist erreichbar (HTTP $STATUS_CODE)"
@@ -117,7 +117,7 @@ jobs:
           echo "# 🔒 Security Scan Ergebnis" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "**Datum:** $(date '+%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_STEP_SUMMARY
-          echo "**Website:** https://jokrah2036.github.io/Linkliste/" >> $GITHUB_STEP_SUMMARY
+          echo "**Website:** https://www.tipps.coreho.com" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           
           # Mozilla Observatory Score
@@ -145,15 +145,15 @@ jobs:
           
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "---" >> $GITHUB_STEP_SUMMARY
-          echo "Vollständiger Report: https://observatory.mozilla.org/analyze/jokrah2036.github.io" >> $GITHUB_STEP_SUMMARY
+          echo "Vollständiger Report: https://observatory.mozilla.org/analyze/www.tipps.coreho.com" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "🔗 SecurityHeaders.com: https://securityheaders.com/?q=https://jokrah2036.github.io/Linkliste/" >> $GITHUB_STEP_SUMMARY
+          echo "🔗 SecurityHeaders.com: https://securityheaders.com/?q=https://www.tipps.coreho.com" >> $GITHUB_STEP_SUMMARY
       
       - name: ⚠️ Warnung bei niedrigem Score
         if: steps.observatory.outputs.score != '' && steps.observatory.outputs.score < 90
         run: |
           echo "::warning::Security Score ist unter 90! Aktueller Score: ${{ steps.observatory.outputs.score }}"
-          echo "Bitte prüfe: https://observatory.mozilla.org/analyze/jokrah2036.github.io"
+          echo "Bitte prüfe: https://observatory.mozilla.org/analyze/www.tipps.coreho.com"
       
       - name: 📧 Scan abgeschlossen
         if: always()
