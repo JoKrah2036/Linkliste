@@ -60,26 +60,25 @@
             padding: 0 10px;
         }
 
-.cta-button {
-    display: block;
-    width: 92%;                  /* exakt passend zur optischen Innenbreite der .section */
-    max-width: 640px;            /* harmonisch bei Containerbreite 700px und Padding */
-    margin: 35px auto 0;         /* oben etwas Luft – klarer Abschluss nach den Boxen */
-    background: linear-gradient(135deg, #f5af19 0%, #f12711 100%);
-    color: #1a1a1a;
-    padding: 18px 0;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 1.1em;
-    box-shadow: 0 6px 20px rgba(245, 175, 25, 0.5),
-                0 0 30px rgba(245, 175, 25, 0.3);
-    transition: all 0.3s ease;
-    cursor: pointer;
-    border: none;
-    text-align: center;
-}
-
+        .cta-button {
+            display: block;
+            width: 92%;
+            max-width: 640px;
+            margin: 35px auto 0;
+            background: linear-gradient(135deg, #f5af19 0%, #f12711 100%);
+            color: #1a1a1a;
+            padding: 18px 0;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1em;
+            box-shadow: 0 6px 20px rgba(245, 175, 25, 0.5),
+                        0 0 30px rgba(245, 175, 25, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            text-align: center;
+        }
 
         .cta-button:hover {
             transform: translateY(-3px);
@@ -157,9 +156,9 @@
         }
 
         .accordion-content.active {
-            max-height: 3000px;
+            max-height: 10000px;
             padding: 0 30px 30px 30px;
-            transition: max-height 0.5s ease-in;
+            transition: max-height 0.8s ease-in;
         }
 
         .link-item {
@@ -181,6 +180,63 @@
             border-color: #f5af19;
             box-shadow: 0 5px 15px rgba(245, 175, 25, 0.4), 0 0 20px rgba(245, 175, 25, 0.2);
             background: linear-gradient(135deg, rgba(245, 175, 25, 0.2) 0%, rgba(241, 39, 17, 0.2) 100%);
+        }
+
+        /* GLOSSAR-SPEZIFISCHE STYLES */
+        .glossary-wrapper {
+            margin-top: 20px;
+            line-height: 1.7;
+            color: #ccc;
+        }
+
+        .glossary-wrapper h2 {
+            color: #f5af19;
+            font-size: 1.8em;
+            margin: 30px 0 20px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(245, 175, 25, 0.3);
+            text-shadow: 0 0 10px rgba(245, 175, 25, 0.3);
+            font-weight: 700;
+        }
+
+        .glossary-wrapper h2:first-child {
+            margin-top: 10px;
+        }
+
+        .glossary-term {
+            background: linear-gradient(135deg, rgba(245, 175, 25, 0.05) 0%, rgba(241, 39, 17, 0.05) 100%);
+            padding: 20px;
+            margin-bottom: 16px;
+            border-radius: 12px;
+            border-left: 4px solid rgba(245, 175, 25, 0.5);
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        .glossary-term:hover {
+            background: linear-gradient(135deg, rgba(245, 175, 25, 0.1) 0%, rgba(241, 39, 17, 0.1) 100%);
+            border-left-color: #f5af19;
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(245, 175, 25, 0.2);
+        }
+
+        .glossary-term strong {
+            color: #f5af19;
+            font-size: 1.15em;
+            display: block;
+            margin-bottom: 10px;
+            text-shadow: 0 0 8px rgba(245, 175, 25, 0.3);
+        }
+
+        /* Verschachtelte Accordion im Glossar */
+        .accordion-section .accordion-section {
+            margin: 15px 0;
+            border: 1px solid rgba(245, 175, 25, 0.15);
+        }
+
+        .accordion-section .accordion-section .accordion-header {
+            font-size: 1.1em;
+            padding: 18px 25px;
         }
 
         .contact-form {
@@ -336,7 +392,6 @@
             margin: 40px 0 30px 0;
         }
 
-
         .disclaimer {
             background: rgba(245, 175, 25, 0.1);
             border: 1px solid rgba(245, 175, 25, 0.3);
@@ -431,7 +486,6 @@
                 padding: 14px 24px;
             }
 
-
             .submit-button {
                 font-size: 1em;
                 padding: 14px 20px;
@@ -440,6 +494,20 @@
             .back-button {
                 width: 100%;
                 text-align: center;
+            }
+
+            .glossary-wrapper h2 {
+                font-size: 1.5em;
+                margin: 25px 0 15px 0;
+            }
+
+            .glossary-term {
+                padding: 16px;
+                margin-bottom: 12px;
+            }
+
+            .glossary-term strong {
+                font-size: 1.1em;
             }
         }
     </style>
@@ -454,21 +522,20 @@
                 <h1 class="title">⚡Sei Deine eigene Bank⚡<i><br>  Wertvolle Ressourcen <br> für erfolgreichen Krypto- & Börsenhandel</i></h1>
             </div>
 
-            <!-- Live Crypto Ticker - an oberster Position -->
+            <!-- Live Crypto Ticker -->
             <div class="section">
                 <h2 class="section-title">📊 Live Krypto-Kurse & Marktstimmung</h2>
                 
-               <!-- CoinGecko Web Component Widget -->
-<div style="margin-bottom: 12px;">
-    <script src="https://widgets.coingecko.com/coingecko-coin-price-marquee-widget.js"></script>
-    <coingecko-coin-price-marquee-widget 
-        coin-ids="bitcoin,ethereum,binancecoin,solana,hex" 
-        currency="usd" 
-        background-color="rgba(30, 30, 30, 0.5)" 
-        locale="de"
-        font-color="#e0e0e0">
-    </coingecko-coin-price-marquee-widget>
-</div>
+                <div style="margin-bottom: 12px;">
+                    <script src="https://widgets.coingecko.com/coingecko-coin-price-marquee-widget.js"></script>
+                    <coingecko-coin-price-marquee-widget 
+                        coin-ids="bitcoin,ethereum,binancecoin,solana,hex" 
+                        currency="usd" 
+                        background-color="rgba(30, 30, 30, 0.5)" 
+                        locale="de"
+                        font-color="#e0e0e0">
+                    </coingecko-coin-price-marquee-widget>
+                </div>
                 
                 <a href="https://alternative.me/crypto/fear-and-greed-index/" class="link-item" target="_blank" id="fng-link">
                     🎯 Fear & Greed Index – Aktuelle Marktstimmung: <span id="fng-value" style="font-weight: 700;">Lädt...</span>
@@ -502,36 +569,36 @@
                     <span class="accordion-icon">▼</span>
                 </div>
                 <div class="accordion-content">
-<a href="https://vasconomics.com/post/periods_when_to_make_money/" class="link-item" target="_blank">
-    ✨ Benner-Zyklus: <i>"Nicht das Markttiming zählt, sondern die Zeit im Markt"</i> (englischsprachiger Artikel)
-</a>                
-<a href="https://drive.google.com/drive/folders/12AfTXlCaxvdoKP1paEP9Oc1KMpYZ_sjL?usp=sharing" class="link-item" target="_blank">
-                    🌱 Denkenswertes Mindset (Google Drive)
-                </a>
-                <a href="https://www.arte.tv/de/videos/112412-001-A/nft-what-the-punk/" class="link-item" target="_blank">
-                    📽️ 👀 NFT: What the Punk! - Pioniere der Kryptokunst | ARTE (Reportage)
-                </a>
-                <a href="https://youtu.be/61-VNwU4FqQ" class="link-item" target="_blank">
-                    📽️ 👀 Petro-Dollar System (Youtube-Video)
-                </a>
-                <a href="https://youtu.be/wevwCy0vqAQ" class="link-item" target="_blank">
-                    📽️ 👀 Venezuela das neue Dubai? BRICS (Youtube-Video)
-                </a>
-                <a href="https://youtu.be/m6ZzqMcqb-w" class="link-item" target="_blank">
-                    📽️ 👀 Goldschmied Fabian und die Geschichte des Geldes (Youtube-Video)
-                </a>
-                <a href="https://www.youtube.com/watch?v=hVqEFpM9nIs&list=PLlQWnS27jXh8XGLZ1ljEC3-UarBjYQWB3" class="link-item" target="_blank">
-                    📽️ 👀 Bitcoin, wie alles begann - Mysterium Satoshi | ARTE (6-teilige Reportage)
-                </a>
-                <a href="https://vimeo.com/cinemuckfilm/humanb?ref=em-v-share" class="link-item" target="_blank">
-                    📽️ 👀 Human B | Bitcoin Dokumentation (Vimeo, deutscher Untertitel)
-                </a>
-                <a href="https://www.youtube.com/watch?v=5f_thPJLku8" class="link-item" target="_blank">
-                    📽️ 👀 OneCoin Betrug: Die meistgesuchte Frau der Welt | Die Kryptoqueen (Youtube, 3-teilige Reportage)
-                </a>
-                <a href="https://www.arte.tv/de/videos/103517-001-A/kapitalismus-made-in-usa-reichtum-als-kult-1-3/" class="link-item" target="_blank">
-                    📽️ Kapitalismus made in USA - Reichtum als Kult | ARTE (3-teilige Reportage)
-                </a>
+                    <a href="https://vasconomics.com/post/periods_when_to_make_money/" class="link-item" target="_blank">
+                        ✨ Benner-Zyklus: <i>"Nicht das Markttiming zählt, sondern die Zeit im Markt"</i> (englischsprachiger Artikel)
+                    </a>                
+                    <a href="https://drive.google.com/drive/folders/12AfTXlCaxvdoKP1paEP9Oc1KMpYZ_sjL?usp=sharing" class="link-item" target="_blank">
+                        🌱 Denkenswertes Mindset (Google Drive)
+                    </a>
+                    <a href="https://www.arte.tv/de/videos/112412-001-A/nft-what-the-punk/" class="link-item" target="_blank">
+                        📽️ 👀 NFT: What the Punk! - Pioniere der Kryptokunst | ARTE (Reportage)
+                    </a>
+                    <a href="https://youtu.be/61-VNwU4FqQ" class="link-item" target="_blank">
+                        📽️ 👀 Petro-Dollar System (Youtube-Video)
+                    </a>
+                    <a href="https://youtu.be/wevwCy0vqAQ" class="link-item" target="_blank">
+                        📽️ 👀 Venezuela das neue Dubai? BRICS (Youtube-Video)
+                    </a>
+                    <a href="https://youtu.be/m6ZzqMcqb-w" class="link-item" target="_blank">
+                        📽️ 👀 Goldschmied Fabian und die Geschichte des Geldes (Youtube-Video)
+                    </a>
+                    <a href="https://www.youtube.com/watch?v=hVqEFpM9nIs&list=PLlQWnS27jXh8XGLZ1ljEC3-UarBjYQWB3" class="link-item" target="_blank">
+                        📽️ 👀 Bitcoin, wie alles begann - Mysterium Satoshi | ARTE (6-teilige Reportage)
+                    </a>
+                    <a href="https://vimeo.com/cinemuckfilm/humanb?ref=em-v-share" class="link-item" target="_blank">
+                        📽️ 👀 Human B | Bitcoin Dokumentation (Vimeo, deutscher Untertitel)
+                    </a>
+                    <a href="https://www.youtube.com/watch?v=5f_thPJLku8" class="link-item" target="_blank">
+                        📽️ 👀 OneCoin Betrug: Die meistgesuchte Frau der Welt | Die Kryptoqueen (Youtube, 3-teilige Reportage)
+                    </a>
+                    <a href="https://www.arte.tv/de/videos/103517-001-A/kapitalismus-made-in-usa-reichtum-als-kult-1-3/" class="link-item" target="_blank">
+                        📽️ Kapitalismus made in USA - Reichtum als Kult | ARTE (3-teilige Reportage)
+                    </a>
                 </div>
             </div>
 
@@ -541,24 +608,25 @@
                     <span class="accordion-icon">▼</span>
                 </div>
                 <div class="accordion-content">
-                <a href="https://www.blockchaincenter.net/en/bitcoin-rainbow-chart/" class="link-item" target="_blank">
-                    🌈 Bitcoin Rainbow Chart – Langfristige Preisbänder & Marktphasen
-                </a>
-                <a href="https://www.tradingview.com/symbols/CRYPTOCAP-BTC.D/" class="link-item" target="_blank">
-                    📈 Bitcoin Dominance Chart – Marktanteil von Bitcoin (BTC.D)
-                </a>
-                <a href="https://coinstats.app/coins/bitcoin-dominance/" class="link-item" target="_blank">
-                    🟧 Bitcoin-Dominanzdiagramm – BTC.D Entwicklung (CoinStats)
-                </a>
-                <a href="https://www.lookintobitcoin.com/charts/pi-cycle-top-indicator/" class="link-item" target="_blank">
-                    🔵 Pi Cycle Top Indicator – Historischer Bitcoin-Top-Indikator
-                </a>
-                <a href="https://www.coinglass.com/pro/futures/LiquidationHeatMap" class="link-item" target="_blank">
-                    🔥 Bitcoin Liquidation Heatmap – Liquidationszonen & Orderbuch
-                </a>
+                    <a href="https://www.blockchaincenter.net/en/bitcoin-rainbow-chart/" class="link-item" target="_blank">
+                        🌈 Bitcoin Rainbow Chart – Langfristige Preisbänder & Marktphasen
+                    </a>
+                    <a href="https://www.tradingview.com/symbols/CRYPTOCAP-BTC.D/" class="link-item" target="_blank">
+                        📈 Bitcoin Dominance Chart – Marktanteil von Bitcoin (BTC.D)
+                    </a>
+                    <a href="https://coinstats.app/coins/bitcoin-dominance/" class="link-item" target="_blank">
+                        🟧 Bitcoin-Dominanzdiagramm – BTC.D Entwicklung (CoinStats)
+                    </a>
+                    <a href="https://www.lookintobitcoin.com/charts/pi-cycle-top-indicator/" class="link-item" target="_blank">
+                        🔵 Pi Cycle Top Indicator – Historischer Bitcoin-Top-Indikator
+                    </a>
+                    <a href="https://www.coinglass.com/pro/futures/LiquidationHeatMap" class="link-item" target="_blank">
+                        🔥 Bitcoin Liquidation Heatmap – Liquidationszonen & Orderbuch
+                    </a>
                 </div>
             </div>
- <div class="accordion-section">
+
+            <div class="accordion-section">
                 <div class="accordion-header" onclick="toggleAccordion(this)">
                     <span>🪙 DeFi & Staking Plattformen</span>
                     <span class="accordion-icon">▼</span>
@@ -575,31 +643,30 @@
                     </a>
                 </div>
             </div>
+
             <div class="accordion-section">
                 <div class="accordion-header" onclick="toggleAccordion(this)">
                     <span>🔨 Tools zur Marktüberwachung</span>
                     <span class="accordion-icon">▼</span>
                 </div>
                 <div class="accordion-content">
-                <a href="https://blockpit.cello.so/mEw24jK3sX2" class="link-item" target="_blank">
-                    🔨 Blockpit: Portfoliotracker und Steuersoftware 
-                </a>
-                <a href="https://cointracking.info?ref=C739800" class="link-item" target="_blank">
-                    🔨 CoinTracking: Portfoliotracker und Steuersoftware, Made in Germany
-                </a>
-                <a href="https://www.portfolio-performance.info/" class="link-item" target="_blank">
-                    🔨 Portfolio Performance: Open Source Programm zur Performance-Berechnung (kostenlos)
-                </a>
-                <a href="https://coinmarketcap.com/invite?ref=RZCVL4QN" class="link-item" target="_blank">
-                    🔨 CoinMarketCap: Alle Kryptowährungen im Überblick inkl. Watchlists
-                </a>
-                <a href="https://de.tradingview.com/gopro/?share_your_love=JoKrah" class="link-item" target="_blank">
-                    🔨 TRADINGVIEW: Krypto-Marktanalyse, Charttechnische Tiefenanalyse
-                </a>
+                    <a href="https://blockpit.cello.so/mEw24jK3sX2" class="link-item" target="_blank">
+                        🔨 Blockpit: Portfoliotracker und Steuersoftware 
+                    </a>
+                    <a href="https://cointracking.info?ref=C739800" class="link-item" target="_blank">
+                        🔨 CoinTracking: Portfoliotracker und Steuersoftware, Made in Germany
+                    </a>
+                    <a href="https://www.portfolio-performance.info/" class="link-item" target="_blank">
+                        🔨 Portfolio Performance: Open Source Programm zur Performance-Berechnung (kostenlos)
+                    </a>
+                    <a href="https://coinmarketcap.com/invite?ref=RZCVL4QN" class="link-item" target="_blank">
+                        🔨 CoinMarketCap: Alle Kryptowährungen im Überblick inkl. Watchlists
+                    </a>
+                    <a href="https://de.tradingview.com/gopro/?share_your_love=JoKrah" class="link-item" target="_blank">
+                        🔨 TRADINGVIEW: Krypto-Marktanalyse, Charttechnische Tiefenanalyse
+                    </a>
                 </div>
             </div>
-
-           
 
             <div class="accordion-section">
                 <div class="accordion-header" onclick="toggleAccordion(this)">
@@ -607,21 +674,21 @@
                     <span class="accordion-icon">▼</span>
                 </div>
                 <div class="accordion-content">
-                <a href="https://www.bitpanda.com/?ref=477409709805234001" class="link-item" target="_blank">
-                    💸 Bitpanda: Der führende Krypto-Broker in Europa
-                </a>
-                <a href="https://www.binance.com/en/activity/referral-entry/CPA?fromActivityPage=true&ref=CPA_00A2NOX1I4" class="link-item" target="_blank">
-                    💸 BINANCE Kryptowallet für Handel, Ein- & Auszahlungen 
-                </a>
-                <a href="https://join.bisonapp.com/tsvz9k" class="link-item" target="_blank">
-                    💸 BISON Kryptowallet für Handel, Ein- & Auszahlungen
-                </a>
-                <a href="https://kraken.app.link/CmH9WLPrBub" class="link-item" target="_blank">
-                    💸 KRAKEN Kryptowallet für Handel, Ein- & Auszahlungen 
-                </a>
-                <a href="https://coinbase.com/join/cybjfj?src=referral-link" class="link-item" target="_blank">
-                    💸 COINBASE Kryptowallet für Handel, Ein- & Auszahlungen 
-                </a>
+                    <a href="https://www.bitpanda.com/?ref=477409709805234001" class="link-item" target="_blank">
+                        💸 Bitpanda: Der führende Krypto-Broker in Europa
+                    </a>
+                    <a href="https://www.binance.com/en/activity/referral-entry/CPA?fromActivityPage=true&ref=CPA_00A2NOX1I4" class="link-item" target="_blank">
+                        💸 BINANCE Kryptowallet für Handel, Ein- & Auszahlungen 
+                    </a>
+                    <a href="https://join.bisonapp.com/tsvz9k" class="link-item" target="_blank">
+                        💸 BISON Kryptowallet für Handel, Ein- & Auszahlungen
+                    </a>
+                    <a href="https://kraken.app.link/CmH9WLPrBub" class="link-item" target="_blank">
+                        💸 KRAKEN Kryptowallet für Handel, Ein- & Auszahlungen 
+                    </a>
+                    <a href="https://coinbase.com/join/cybjfj?src=referral-link" class="link-item" target="_blank">
+                        💸 COINBASE Kryptowallet für Handel, Ein- & Auszahlungen 
+                    </a>
                 </div>
             </div>
 
@@ -631,523 +698,466 @@
                     <span class="accordion-icon">▼</span>
                 </div>
                 <div class="accordion-content">
-                <a href="https://drive.google.com/file/d/1VyeGLpcCy3syTYiNlWZFN0p2ggN8S7Nf/view?usp=sharing" class="link-item" target="_blank">
-                    ⬇️ Download PDF, Buchempfehlungen mit Links 
-                </a>
+                    <a href="https://drive.google.com/file/d/1VyeGLpcCy3syTYiNlWZFN0p2ggN8S7Nf/view?usp=sharing" class="link-item" target="_blank">
+                        ⬇️ Download PDF, Buchempfehlungen mit Links 
+                    </a>
                 </div>
             </div>
 
-<div class="accordion-section">
-    <div class="accordion-header" onclick="toggleAccordion(this)">
-        <span>📚 💡 Lernenswertes</span>
-        <span class="accordion-icon">▼</span>
-    </div>
+            <div class="accordion-section">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span>📚 💡 Lernenswertes</span>
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <a href="https://tradingmasters.de" class="link-item" target="_blank">
+                        🧩 Trading Masters – Börsenspiel mit exklusiver Trader-Ausbildung (kostenlos)
+                    </a>
 
-    <div class="accordion-content">
-
-        <a href="https://tradingmasters.de" class="link-item" target="_blank">
-            🧩 Trading Masters – Börsenspiel mit exklusiver Trader-Ausbildung (kostenlos)
-        </a>
-
-        <!-- Unterpunkt: Krypto-Glossar -->
-        <div class="accordion-section" style="margin-top:15px;">
-            <div class="accordion-header" onclick="toggleAccordion(this)">
-                <span>📘 Krypto-Glossar – Begriffe einfach erklärt</span>
-                <span class="accordion-icon">▼</span>
-            </div>
-
-            <div class="accordion-content">
-                <div class="glossary-wrapper" style="margin-top:25px; line-height:1.6; color:#ccc;">
-
-
+                    <!-- Krypto-Glossar als verschachteltes Accordion -->
+                    <div class="accordion-section" style="margin-top:15px;">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <span>📘 Krypto-Glossar – Begriffe einfach erklärt</span>
+                            <span class="accordion-icon">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="glossary-wrapper">
 
 <h2>A</h2>
 
 <div class="glossary-term">
-<strong>Allzeithoch (ATH)</strong><br>
-Das Allzeithoch ist der höchste Preis, den eine Kryptowährung jemals erreicht hat.
-Viele Anleger kaufen am ATH aus Angst, etwas zu verpassen — oft ein Fehler, weil nach einem Allzeithoch häufig Korrekturen folgen.
+<strong>Allzeithoch (ATH)</strong>
+Das Allzeithoch ist der höchste Preis, den eine Kryptowährung jemals erreicht hat. Viele Anleger kaufen am ATH aus Angst, etwas zu verpassen — oft ein Fehler, weil nach einem Allzeithoch häufig Korrekturen folgen.
 </div>
 
 <div class="glossary-term">
-<strong>Altcoin</strong><br>
-Alle Kryptowährungen außer Bitcoin.
-Viele Altcoins bringen neue Funktionen wie Smart Contracts, schnelle Transaktionen oder besondere Anwendungsbereiche.
+<strong>Altcoin</strong>
+Alle Kryptowährungen außer Bitcoin. Viele Altcoins bringen neue Funktionen wie Smart Contracts, schnelle Transaktionen oder besondere Anwendungsbereiche.
 </div>
 
 <div class="glossary-term">
-<strong>API (Application Programming Interface)</strong><br>
-Schnittstelle, die Software-Programme verbindet.
-In Krypto z. B. für Portfolio-Tools, Steuerprogramme oder Trading-Bots.
+<strong>API (Application Programming Interface)</strong>
+Schnittstelle, die Software-Programme verbindet. In Krypto z. B. für Portfolio-Tools, Steuerprogramme oder Trading-Bots.
 </div>
 
 <div class="glossary-term">
-<strong>ASIC</strong><br>
-Spezial-Computerchip nur für Mining — sehr schnell, aber stromintensiv.
-Typisch bei Bitcoin-Mining.
+<strong>ASIC</strong>
+Spezial-Computerchip nur für Mining — sehr schnell, aber stromintensiv. Typisch bei Bitcoin-Mining.
 </div>
 
 <div class="glossary-term">
-<strong>Ask-Preis (Briefkurs)</strong><br>
-Preis, den Verkäufer mindestens für ein Asset verlangen.
-Gegenteil: Bid-Preis.
+<strong>Ask-Preis (Briefkurs)</strong>
+Preis, den Verkäufer mindestens für ein Asset verlangen. Gegenteil: Bid-Preis.
 </div>
 
 <h2>B</h2>
 
 <div class="glossary-term">
-<strong>Bärenmarkt</strong><br>
-Längerer Zeitraum fallender Kurse und pessimistischer Stimmung.
-Gute Kaufphase für langfristige Anleger.
+<strong>Bärenmarkt</strong>
+Längerer Zeitraum fallender Kurse und pessimistischer Stimmung. Gute Kaufphase für langfristige Anleger.
 </div>
 
 <div class="glossary-term">
-<strong>Bid-Preis</strong><br>
-Preis, den Käufer bereit sind zu zahlen.
-Differenz zwischen Bid und Ask = Spread.
+<strong>Bid-Preis</strong>
+Preis, den Käufer bereit sind zu zahlen. Differenz zwischen Bid und Ask = Spread.
 </div>
 
 <div class="glossary-term">
-<strong>Bitcoin (BTC)</strong><br>
-Erste Kryptowährung, gestartet 2009.
-Dezentral, begrenztes Angebot (21 Mio.), fälschungssicher und unabhängig von Banken.
-Gilt als digitales Wertspeicher-Asset — „digitales Gold“.
+<strong>Bitcoin (BTC)</strong>
+Erste Kryptowährung, gestartet 2009. Dezentral, begrenztes Angebot (21 Mio.), fälschungssicher und unabhängig von Banken. Gilt als digitales Wertspeicher-Asset — „digitales Gold".
 </div>
 
 <div class="glossary-term">
-<strong>Block</strong><br>
-Datenpaket, das Transaktionen enthält und an die Blockchain angehängt wird.
-Sobald ein Block bestätigt ist, gelten Transaktionen als sicher.
+<strong>Block</strong>
+Datenpaket, das Transaktionen enthält und an die Blockchain angehängt wird. Sobald ein Block bestätigt ist, gelten Transaktionen als sicher.
 </div>
 
 <div class="glossary-term">
-<strong>Blockchain</strong><br>
-Dezentrale, digitale Datenbank, in der Transaktionen dauerhaft und fälschungssicher gespeichert werden.
-Keine zentrale Kontrolle, jeder kann sie einsehen und überprüfen.
+<strong>Blockchain</strong>
+Dezentrale, digitale Datenbank, in der Transaktionen dauerhaft und fälschungssicher gespeichert werden. Keine zentrale Kontrolle, jeder kann sie einsehen und überprüfen.
 </div>
-
 
 <h2>C</h2>
 
 <div class="glossary-term">
-<strong>Coin</strong><br>
-Digitale Währung auf einer eigenen Blockchain (z. B. BTC, ETH).
-Unterscheidung zu Token: Token laufen auf einer bestehenden Blockchain.
+<strong>Coin</strong>
+Digitale Währung auf einer eigenen Blockchain (z. B. BTC, ETH). Unterscheidung zu Token: Token laufen auf einer bestehenden Blockchain.
 </div>
 
 <div class="glossary-term">
-<strong>Cold Wallet</strong><br>
-Wallet ohne Internetverbindung (z. B. Hardware-Wallet).
-Sehr sicher gegen Hackerangriffe.
+<strong>Cold Wallet</strong>
+Wallet ohne Internetverbindung (z. B. Hardware-Wallet). Sehr sicher gegen Hackerangriffe.
 </div>
 
 <div class="glossary-term">
-<strong>Konsensmechanismus</strong><br>
+<strong>Konsensmechanismus</strong>
 Regelsystem, mit dem Blockchain-Teilnehmer entscheiden, welche Transaktionen gültig sind (z. B. Proof-of-Work, Proof-of-Stake).
 </div>
-
 
 <h2>D</h2>
 
 <div class="glossary-term">
-<strong>DeFi (Decentralized Finance)</strong><br>
-Finanzsystem auf der Blockchain ohne Banken oder Vermittler.
-Zinsen, Kredite, Handel — alles automatisiert über Smart Contracts.
+<strong>DeFi (Decentralized Finance)</strong>
+Finanzsystem auf der Blockchain ohne Banken oder Vermittler. Zinsen, Kredite, Handel — alles automatisiert über Smart Contracts.
 </div>
 
 <div class="glossary-term">
-<strong>DEX (Decentralized Exchange)</strong><br>
-Dezentrale Handelsplattform ohne zentrale Kontrolle.
-Sie behalten Ihre Coins selbst, statt sie an eine Börse zu übertragen.
+<strong>DEX (Decentralized Exchange)</strong>
+Dezentrale Handelsplattform ohne zentrale Kontrolle. Sie behalten Ihre Coins selbst, statt sie an eine Börse zu übertragen.
 </div>
 
 <div class="glossary-term">
-<strong>DoS-Attacke</strong><br>
-Überlastungsangriff auf Systeme durch zu viele Anfragen.
-Ziel: Dienste stören oder blockieren.
+<strong>DoS-Attacke</strong>
+Überlastungsangriff auf Systeme durch zu viele Anfragen. Ziel: Dienste stören oder blockieren.
 </div>
 
 <div class="glossary-term">
-<strong>Dollar-Cost-Averaging (DCA)</strong><br>
+<strong>Dollar-Cost-Averaging (DCA)</strong>
 DCA ist eine langfristige Investmentstrategie, bei der Sie regelmäßig einen festen Betrag in Bitcoin oder andere Kryptowährungen investieren – unabhängig davon, ob der Kurs gerade steigt oder fällt.<br><br>
 
-Beispiel:<br>
+<strong>Beispiel:</strong><br>
 Sie investieren jeden Monat 100 € in Bitcoin.<br>
 Steht Bitcoin hoch → Sie kaufen weniger Satoshis<br>
 Steht Bitcoin niedrig → Sie kaufen mehr Satoshis<br><br>
 
-Mit der Zeit ergibt sich ein Durchschnittspreis, der Schwankungen glättet.
-Das ist besonders hilfreich, weil niemand verlässlich den perfekten Kaufzeitpunkt trifft – nicht einmal professionelle Anleger.<br><br>
+Mit der Zeit ergibt sich ein Durchschnittspreis, der Schwankungen glättet. Das ist besonders hilfreich, weil niemand verlässlich den perfekten Kaufzeitpunkt trifft – nicht einmal professionelle Anleger.<br><br>
 
-Warum DCA sinnvoll ist:<br>
-Kein Stress mit Markt-Timing<br>
-Reduziert das Risiko, „auf einmal zum falschen Zeitpunkt“ zu investieren<br>
-Baut systematisch Vermögen auf<br><br>
-
-Stärkt Disziplin und Emotionenkontrolle<br><br>
+<strong>Warum DCA sinnvoll ist:</strong><br>
+• Kein Stress mit Markt-Timing<br>
+• Reduziert das Risiko, „auf einmal zum falschen Zeitpunkt" zu investieren<br>
+• Baut systematisch Vermögen auf<br>
+• Stärkt Disziplin und Emotionenkontrolle<br><br>
 
 DCA wird seit Jahrzehnten in der Finanzwelt genutzt (z. B. bei Aktien- oder ETF-Sparplänen) und gilt auch im Kryptobereich als eine gute Strategie für langfristigen Erfolg.
 </div>
 
-
 <h2>E</h2>
 
 <div class="glossary-term">
-<strong>Ethereum (ETH)</strong><br>
-Blockchain-Plattform für Smart Contracts, NFTs und DeFi.
-Zweitgrößte Kryptowährung nach Bitcoin.
+<strong>Ethereum (ETH)</strong>
+Blockchain-Plattform für Smart Contracts, NFTs und DeFi. Zweitgrößte Kryptowährung nach Bitcoin.
 </div>
 
 <div class="glossary-term">
-<strong>Exchange</strong><br>
-Handelsplattform zum Kaufen und Verkaufen von Kryptowährungen.
-Es gibt zentrale Börsen (z. B. Bitvavo) und dezentrale Börsen (z. B. Uniswap).
+<strong>Exchange</strong>
+Handelsplattform zum Kaufen und Verkaufen von Kryptowährungen. Es gibt zentrale Börsen (z. B. Bitvavo) und dezentrale Börsen (z. B. Uniswap).
 </div>
-
 
 <h2>F</h2>
 
 <div class="glossary-term">
-<strong>Fiatgeld</strong><br>
-Staatliche Währungen wie Euro oder Dollar.
-Kein innerer Wert — Wert basiert auf Vertrauen und staatlicher Garantie.
+<strong>Fiatgeld</strong>
+Staatliche Währungen wie Euro oder Dollar. Kein innerer Wert — Wert basiert auf Vertrauen und staatlicher Garantie.
 </div>
 
 <div class="glossary-term">
-<strong>FOMO</strong><br>
-Fear Of Missing Out — Angst, eine Chance zu verpassen.
-Führt oft zu emotionalen Fehlkäufen.
+<strong>FOMO</strong>
+Fear Of Missing Out — Angst, eine Chance zu verpassen. Führt oft zu emotionalen Fehlkäufen.
 </div>
 
 <div class="glossary-term">
-<strong>Fork</strong><br>
-Änderung im Blockchain-Protokoll.
+<strong>Fork</strong>
+Änderung im Blockchain-Protokoll.<br>
 Hard Fork = komplett neue Blockchain<br>
 Soft Fork = kompatible Erweiterung
 </div>
 
 <div class="glossary-term">
-<strong>FUD</strong><br>
+<strong>FUD</strong>
 Fear, Uncertainty, Doubt — bewusst verbreitete Unsicherheit, oft zur Kursmanipulation.
 </div>
-
 
 <h2>G</h2>
 
 <div class="glossary-term">
-<strong>Genesis Block</strong><br>
-Erster Block einer Blockchain.
-Bitcoin-Genesis-Block: 3. Januar 2009.
+<strong>Genesis Block</strong>
+Erster Block einer Blockchain. Bitcoin-Genesis-Block: 3. Januar 2009.
 </div>
 
 <div class="glossary-term">
-<strong>GitHub</strong><br>
+<strong>GitHub</strong>
 Plattform zur Veröffentlichung und Zusammenarbeit an Software-Code — wichtig für Open-Source-Kryptoprojekte.
 </div>
 
 <div class="glossary-term">
-<strong>Gas Fee</strong><br>
+<strong>Gas Fee</strong>
 Transaktionsgebühr im Ethereum-Netzwerk.
 </div>
-
 
 <h2>H</h2>
 
 <div class="glossary-term">
-<strong>Halving</strong><br>
-Regelmäßige Halbierung der Bitcoin-Mining-Belohnung (alle ca. 4 Jahre).
-Sorgt für Knappheit und ist langfristig kursstabilisierend bzw. kursfördernd.
+<strong>Halving</strong>
+Regelmäßige Halbierung der Bitcoin-Mining-Belohnung (alle ca. 4 Jahre). Sorgt für Knappheit und ist langfristig kursstabilisierend bzw. kursfördernd.
 </div>
 
 <div class="glossary-term">
-<strong>Hash / Hashrate</strong><br>
+<strong>Hash / Hashrate</strong>
 Hash = kryptografischer Fingerabdruck von Daten<br>
 Hashrate = gesamte Rechenleistung im Netzwerk → Sicherheitskennzahl
 </div>
 
 <div class="glossary-term">
-<strong>HODL</strong><br>
-„Hold On for Dear Life“ — langfristig halten, egal wie stark der Kurs schwankt.
-Entstand durch Tippfehler, heute Anleger-Philosophie.
+<strong>HODL</strong>
+„Hold On for Dear Life" — langfristig halten, egal wie stark der Kurs schwankt. Entstand durch Tippfehler, heute Anleger-Philosophie.
 </div>
-
 
 <h2>I</h2>
 
 <div class="glossary-term">
-<strong>ICO</strong><br>
-Token-Verkauf zur Finanzierung neuer Projekte.
-Hohe Chancen, aber auch hohes Risiko (Scams möglich).
+<strong>ICO</strong>
+Token-Verkauf zur Finanzierung neuer Projekte. Hohe Chancen, aber auch hohes Risiko (Scams möglich).
 </div>
-
 
 <h2>K</h2>
 
 <div class="glossary-term">
-<strong>Krypto / Kryptowährung</strong><br>
+<strong>Krypto / Kryptowährung</strong>
 Digitale, kryptografisch gesicherte Währung ohne zentrale Bank oder Regierung.
 </div>
 
 <div class="glossary-term">
-<strong>KYC</strong><br>
+<strong>KYC</strong>
 Identitätsprüfung an regulierten Börsen: Ausweis, Selfie, ggf. Adressnachweis.
 </div>
-
 
 <h2>L</h2>
 
 <div class="glossary-term">
-<strong>Ledger</strong><br>
+<strong>Ledger</strong>
 Hauptbuch der Blockchain — enthält alle Transaktionen.
 </div>
 
 <div class="glossary-term">
-<strong>Lightning-Network</strong><br>
+<strong>Lightning-Network</strong>
 Zahlungsnetzwerk auf Bitcoin-Basis für schnelle und günstige Transaktionen.
 </div>
-
 
 <h2>M</h2>
 
 <div class="glossary-term">
-<strong>Marktkapitalisierung</strong><br>
+<strong>Marktkapitalisierung</strong>
 Preis × zirkulierende Menge = Gesamtwert einer Kryptowährung.
 </div>
 
 <div class="glossary-term">
-<strong>Mining / Miner</strong><br>
+<strong>Mining / Miner</strong>
 Verbinden Transaktionen zu Blöcken, sichern das Netzwerk (bei PoW) und erhalten Belohnungen.
 </div>
 
 <div class="glossary-term">
-<strong>Mining-Pool</strong><br>
+<strong>Mining-Pool</strong>
 Gruppen von Minern, die Rechenleistung teilen und Gewinne verteilen.
 </div>
 
 <div class="glossary-term">
-<strong>Masternode</strong><br>
+<strong>Masternode</strong>
 Besonderer Blockchain-Knoten mit Zusatzaufgaben, manchmal mit Belohnungen.
 </div>
 
 <div class="glossary-term">
-<strong>Multisig</strong><br>
+<strong>Multisig</strong>
 Transaktion benötigt mehrere Schlüssel → höhere Sicherheit.
 </div>
-
 
 <h2>N</h2>
 
 <div class="glossary-term">
-<strong>Node</strong><br>
-Computer, der Blockchain-Daten speichert und Transaktionen prüft.
-Grundpfeiler der Dezentralisierung.
+<strong>Node</strong>
+Computer, der Blockchain-Daten speichert und Transaktionen prüft. Grundpfeiler der Dezentralisierung.
 </div>
 
 <div class="glossary-term">
-<strong>NFT</strong><br>
+<strong>NFT</strong>
 Einzigartiger digitaler Besitznachweis — z. B. Kunst, Musik, Tickets, Zugangsrechte.
 </div>
-
 
 <h2>O</h2>
 
 <div class="glossary-term">
-<strong>Open-Source</strong><br>
+<strong>Open-Source</strong>
 Code ist öffentlich einsehbar → Transparenz und Sicherheit.
 </div>
 
 <div class="glossary-term">
-<strong>Off-Chain</strong><br>
+<strong>Off-Chain</strong>
 Transaktionen außerhalb der Blockchain — schneller und günstiger (z. B. Lightning).
 </div>
-
 
 <h2>P</h2>
 
 <div class="glossary-term">
-<strong>Paper-Wallet</strong><br>
+<strong>Paper-Wallet</strong>
 Wallet-Schlüssel auf Papier gespeichert — sehr sicher offline, aber verlierbar.
 </div>
 
 <div class="glossary-term">
-<strong>P2P</strong><br>
+<strong>P2P</strong>
 Direkter Austausch zwischen Nutzern ohne Zwischeninstanz.
 </div>
 
 <div class="glossary-term">
-<strong>Private Key</strong><br>
+<strong>Private Key</strong>
 Ihr geheimes Kryptoschlüssel-Passwort — niemals weitergeben.
 </div>
 
 <div class="glossary-term">
-<strong>Public Key</strong><br>
+<strong>Public Key</strong>
 Öffentliche Adresse für den Empfang von Kryptowährungen.
 </div>
 
 <div class="glossary-term">
-<strong>Proof-of-Stake</strong><br>
+<strong>Proof-of-Stake</strong>
 Blockchain-Sicherung durch Staking, energieeffizient.
 </div>
 
 <div class="glossary-term">
-<strong>Proof-of-Work</strong><br>
+<strong>Proof-of-Work</strong>
 Blockchain-Sicherung durch Mining, sehr sicher, energieintensiv.
 </div>
 
 <div class="glossary-term">
-<strong>Pump & Dump</strong><br>
-Kurs künstlich hochpushen und dann abverkaufen — häufig bei Meme-Coins.
-Einsteiger verlieren meist → Vorsicht!
+<strong>Pump & Dump</strong>
+Kurs künstlich hochpushen und dann abverkaufen — häufig bei Meme-Coins. Einsteiger verlieren meist → Vorsicht!
 </div>
-
 
 <h2>Q</h2>
 
 <div class="glossary-term">
-<strong>QR-Code</strong><br>
+<strong>QR-Code</strong>
 Scanbare Code-Darstellung Ihrer Wallet-Adresse — vermeidet Tippfehler.
 </div>
-
 
 <h2>R</h2>
 
 <div class="glossary-term">
-<strong>RLUSD</strong><br>
+<strong>RLUSD</strong>
 USD-gebundener Ripple-Stablecoin.
 </div>
-
 
 <h2>S</h2>
 
 <div class="glossary-term">
-<strong>Satoshi / Satoshi Nakamoto</strong><br>
+<strong>Satoshi / Satoshi Nakamoto</strong>
 Kleinste Einheit von Bitcoin + Name des Bitcoin-Erfinders (Identität unbekannt).
 </div>
 
 <div class="glossary-term">
-<strong>Seed-Phrase</strong><br>
+<strong>Seed-Phrase</strong>
 12–24 Wörter zur Wallet-Wiederherstellung — wichtigste Sicherheit im Krypto-Bereich.
 </div>
 
 <div class="glossary-term">
-<strong>SegWit</strong><br>
+<strong>SegWit</strong>
 Bitcoin-Upgrade für geringere Gebühren und mehr Transaktionen pro Block.
 </div>
 
 <div class="glossary-term">
-<strong>Smart Contract</strong><br>
+<strong>Smart Contract</strong>
 Selbst ausführender, digitaler Vertrag — Grundlage für DeFi & NFTs.
 </div>
 
 <div class="glossary-term">
-<strong>Stablecoin</strong><br>
+<strong>Stablecoin</strong>
 Kryptowährung mit stabilem Wert, meist 1:1 an US-Dollar gebunden.
 </div>
 
 <div class="glossary-term">
-<strong>Staking</strong><br>
+<strong>Staking</strong>
 Coins hinterlegen und Belohnungen erhalten (PoS-Netzwerke).
 </div>
 
 <div class="glossary-term">
-<strong>Stock-to-Flow</strong><br>
+<strong>Stock-to-Flow</strong>
 Modell zur Bewertung knapper Güter wie Bitcoin.
 </div>
 
 <div class="glossary-term">
-<strong>Sparplan</strong><br>
-Ein Sparplan ist die praktische Umsetzung von DCA.
-Statt einmalig viel Geld zu investieren, kaufen Sie automatisch und regelmäßig – z. B. monatlich oder wöchentlich – einen bestimmten Betrag Bitcoin oder andere Coins.<br><br>
+<strong>Sparplan</strong>
+Ein Sparplan ist die praktische Umsetzung von DCA. Statt einmalig viel Geld zu investieren, kaufen Sie automatisch und regelmäßig – z. B. monatlich oder wöchentlich – einen bestimmten Betrag Bitcoin oder andere Coins.<br><br>
 
-Beispiel:<br>
+<strong>Beispiel:</strong><br>
 50 €, 100 € oder 250 € pro Monat – immer gleiche Zeit, immer gleicher Betrag.<br><br>
 
-Vorteile:<br>
-Automatisiert → Sie müssen nichts tun<br>
-Kein Stress mit Kursbewegungen<br>
-Kein ständiges „Soll ich jetzt kaufen?“<br>
-Ideal für Einsteiger und langfristiges Investieren<br>
-Funktioniert wie ein Aktien oder ETF-Sparplan – nur für digitale Werte<br>
-Viele Anleger vergleichen einen Bitcoin-Sparplan mit „digitalem Vermögensaufbau“: langsam, stetig, zuverlässig.<br>
-Mehr Disziplin. Weniger Emotion.<br><br>
+<strong>Vorteile:</strong><br>
+• Automatisiert → Sie müssen nichts tun<br>
+• Kein Stress mit Kursbewegungen<br>
+• Kein ständiges „Soll ich jetzt kaufen?"<br>
+• Ideal für Einsteiger und langfristiges Investieren<br>
+• Funktioniert wie ein Aktien oder ETF-Sparplan – nur für digitale Werte<br><br>
 
-Wichtig für Einsteiger:<br>
-Betrag wählen, der gut zum Budget passt<br>
-Geduldig bleiben (Krypto schwankt stark)<br>
-Langfristig denken, nicht ständig Kurse prüfen<br>
+Viele Anleger vergleichen einen Bitcoin-Sparplan mit „digitalem Vermögensaufbau": langsam, stetig, zuverlässig. Mehr Disziplin. Weniger Emotion.<br><br>
+
+<strong>Wichtig für Einsteiger:</strong><br>
+• Betrag wählen, der gut zum Budget passt<br>
+• Geduldig bleiben (Krypto schwankt stark)<br>
+• Langfristig denken, nicht ständig Kurse prüfen<br><br>
+
 Ein Sparplan schafft Ruhe, Struktur und Klarheit — vor allem in volatilen Märkten.
 </div>
-
 
 <h2>T</h2>
 
 <div class="glossary-term">
-<strong>Token</strong><br>
+<strong>Token</strong>
 Digitale Vermögenswerte auf einer Blockchain wie Ethereum.
 </div>
 
 <div class="glossary-term">
-<strong>Tokenomics</strong><br>
+<strong>Tokenomics</strong>
 Wirtschaftliche Grundlagen eines Tokens — Angebot, Nachfrage, Verteilung, Anreize.
 </div>
 
 <div class="glossary-term">
-<strong>Transaktionsbestätigung</strong><br>
+<strong>Transaktionsbestätigung</strong>
 Netzwerk bestätigt eine Transaktion = sie gilt als sicher.
 </div>
-
 
 <h2>U</h2>
 
 <div class="glossary-term">
-<strong>Utility-Token</strong><br>
+<strong>Utility-Token</strong>
 Token mit Nutzwert (z. B. Zugang zu Funktionen oder Plattformen).
 </div>
-
 
 <h2>V</h2>
 
 <div class="glossary-term">
-<strong>Validator</strong><br>
+<strong>Validator</strong>
 Prüft Transaktionen im Proof-of-Stake-System — ersetzt Miner.
 </div>
 
 <div class="glossary-term">
-<strong>Volatilität</strong><br>
+<strong>Volatilität</strong>
 Starke Kursschwankungen — typisch für Kryptowährungen.
 </div>
-
 
 <h2>W</h2>
 
 <div class="glossary-term">
-<strong>Wallet</strong><br>
-Digitale Geldbörse für Ihre Coins.
-Speichert Schlüssel, nicht Coins — Coins bleiben immer auf der Blockchain.
+<strong>Wallet</strong>
+Digitale Geldbörse für Ihre Coins. Speichert Schlüssel, nicht Coins — Coins bleiben immer auf der Blockchain.
 </div>
-
 
 <h2>X</h2>
 
 <div class="glossary-term">
-<strong>XRP</strong><br>
+<strong>XRP</strong>
 Kryptowährung für schnelle und kostengünstige Transaktionen auf dem XRP-Ledger.
 </div>
-
 
 <h2>Z</h2>
 
 <div class="glossary-term">
-<strong>Zero-Knowledge-Proof</strong><br>
+<strong>Zero-Knowledge-Proof</strong>
 Kryptografische Methode, mit der man etwas beweisen kann, ohne Details preiszugeben — wichtig für Datenschutz-Blockchain-Technologien.
 </div>
-</div> <!-- glossary-wrapper -->
 
-            </div> <!-- glossary accordion-content -->
-        </div> <!-- glossary accordion-section -->
-
-    </div> <!-- Haupt-accordion-content -->
-</div> <!-- Haupt-accordion-section -->
+                            </div> <!-- glossary-wrapper -->
+                        </div> <!-- glossary accordion-content -->
+                    </div> <!-- glossary accordion-section -->
+                </div> <!-- Haupt-accordion-content -->
+            </div> <!-- Haupt-accordion-section -->
 
             <div class="footer-buttons">
                 <button class="cta-button" onclick="showContactForm()">Jetzt kontaktieren</button>
@@ -1159,7 +1169,7 @@ Kryptografische Methode, mit der man etwas beweisen kann, ohne Details preiszuge
                 Die hier aufgeführten Links und Informationen dienen ausschließlich allgemeinen Informationszwecken. Es handelt sich nicht um eine Anlage-, Finanz- oder Rechtsberatung. Für die Inhalte externer Webseiten übernehme ich keine Haftung; die Verantwortung liegt bei den jeweiligen Anbietern. Trotz sorgfältiger Auswahl kann keine Gewähr für Richtigkeit, Vollständigkeit oder Aktualität der Inhalte übernommen werden. Bitte prüfen Sie alle Quellen eigenständig, bevor Sie finanzielle oder rechtliche Entscheidungen treffen.
             </div>
 
-            <!-- Footer Links NACH dem Disclaimer -->
+            <!-- Footer Links -->
             <div class="footer-links">
                 <a href="#" id="impressum-link">Impressum</a>
                 <span style="color: #666;">|</span>
@@ -1167,6 +1177,9 @@ Kryptografische Methode, mit der man etwas beweisen kann, ohne Details preiszuge
             </div>
         </div>
 
+        <!-- REST DES CODES BLEIBT UNVERÄNDERT... -->
+        <!-- (Kontaktformular, Impressum, Datenschutz, JavaScript) -->
+        
         <!-- Kontaktformular (versteckt) -->
         <div class="contact-form" id="contactForm">
             <button class="back-button" onclick="hideContactForm()">← Zurück zu den Links</button>
@@ -1182,7 +1195,6 @@ Kryptografische Methode, mit der man etwas beweisen kann, ohne Details preiszuge
             
             <h2 class="section-title">Kontaktiere mich</h2>
             <form id="contactFormElement" action="https://formspree.io/f/xnnoolzj" method="POST">
-                <!-- Honeypot Feld - unsichtbar für Menschen, sichtbar für Bots -->
                 <div class="honeypot">
                     <label for="website">Website</label>
                     <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
@@ -1277,7 +1289,7 @@ Kryptografische Methode, mit der man etwas beweisen kann, ohne Details preiszuge
             </div>
         </div>
 
-<!-- Datenschutzerklärung (versteckt) -->
+        <!-- Datenschutzerklärung (versteckt) -->
         <div class="contact-form" id="datenschutzContent">
             <button class="back-button" onclick="hideDatenschutz()">← Zurück zur Startseite</button>
             <h2 class="section-title">Datenschutzerklärung</h2>
@@ -1430,9 +1442,7 @@ Kryptografische Methode, mit der man etwas beweisen kann, ohne Details preiszuge
             charCount.textContent = textarea.value.length;
         }
 
-        // Event Listeners für Impressum und Datenschutz Links
         document.addEventListener('DOMContentLoaded', function() {
-            // E-Mail Verschleierung - wird erst bei Klick sichtbar
             function showEmail(element) {
                 const user = 'tipps';
                 const domain = 'coreho.com';
@@ -1442,7 +1452,6 @@ Kryptografische Methode, mit der man etwas beweisen kann, ohne Details preiszuge
                 element.onclick = null;
             }
             
-            // E-Mail im Impressum
             const emailSpan = document.getElementById('email-address');
             if (emailSpan) {
                 emailSpan.onclick = function() {
@@ -1450,7 +1459,6 @@ Kryptografische Methode, mit der man etwas beweisen kann, ohne Details preiszuge
                 };
             }
             
-            // E-Mail in Datenschutz
             const emailSpanDsgvo = document.getElementById('email-address-dsgvo');
             if (emailSpanDsgvo) {
                 emailSpanDsgvo.onclick = function() {
@@ -1458,7 +1466,6 @@ Kryptografische Methode, mit der man etwas beweisen kann, ohne Details preiszuge
                 };
             }
             
-            // Impressum & Datenschutz Links
             const impressumLink = document.getElementById('impressum-link');
             const datenschutzLink = document.getElementById('datenschutz-link');
             
@@ -1476,7 +1483,6 @@ Kryptografische Methode, mit der man etwas beweisen kann, ohne Details preiszuge
                 });
             }
 
-            // Kontaktformular mit Honeypot-Schutz
             const form = document.getElementById('contactFormElement');
             const successMessage = document.getElementById('successMessage');
             const errorMessage = document.getElementById('errorMessage');
@@ -1484,11 +1490,10 @@ Kryptografische Methode, mit der man etwas beweisen kann, ohne Details preiszuge
             form.addEventListener('submit', async function(e) {
                 e.preventDefault();
 
-                // Honeypot-Check: Wenn das "website" Feld ausgefüllt ist, ist es ein Bot
                 const honeypot = document.getElementById('website').value;
                 if (honeypot !== '') {
                     console.log('Bot erkannt - Formular wird nicht gesendet');
-                    return false; // Formular nicht absenden
+                    return false;
                 }
 
                 const formData = new FormData(form);
@@ -1525,65 +1530,53 @@ Kryptografische Methode, mit der man etwas beweisen kann, ohne Details preiszuge
             });
         });
 
-        // Accordion Toggle Function
         function toggleAccordion(header) {
             const content = header.nextElementSibling;
             const icon = header.querySelector('.accordion-icon');
             
-            // Toggle active class
             header.classList.toggle('active');
             content.classList.toggle('active');
         }
 
-            // Fear & Greed Index - Live Update
-      // =============================
-
-    async function updateFearGreedIndex() {
-        const valueSpan = document.getElementById('fng-value');
-        if (!valueSpan) return;
-
-        try {
-            // Direkt funktionierende Quelle: Alternative.me
-            const res = await fetch('https://api.alternative.me/fng/?limit=1');
-            const data = await res.json();
-            if (!data || !data.data || !data.data[0]) throw new Error('Keine Daten');
-
-            const value = parseInt(data.data[0].value);
-            const classification = data.data[0].value_classification;
-
-            const map = {
-                'Extreme Fear': 'Extreme Angst',
-                'Fear': 'Angst',
-                'Neutral': 'Neutral',
-                'Greed': 'Gier',
-                'Extreme Greed': 'Extreme Gier'
-            };
-            const label = map[classification] || classification;
-
-            let color = '#fbbf24';
-            if (value <= 25) color = '#f87171';
-            else if (value <= 50) color = '#fbbf24';
-            else color = '#4ade80';
-
-            valueSpan.innerHTML = `<span style="color:${color}">${value} (${label})</span>`;
-        } catch (err) {
-            console.error('Fehler beim Abrufen des Fear & Greed Index:', err);
+        async function updateFearGreedIndex() {
             const valueSpan = document.getElementById('fng-value');
-            if (valueSpan) {
-                valueSpan.textContent = 'Nicht verfügbar';
-                valueSpan.style.color = '#999';
+            if (!valueSpan) return;
+
+            try {
+                const res = await fetch('https://api.alternative.me/fng/?limit=1');
+                const data = await res.json();
+                if (!data || !data.data || !data.data[0]) throw new Error('Keine Daten');
+
+                const value = parseInt(data.data[0].value);
+                const classification = data.data[0].value_classification;
+
+                const map = {
+                    'Extreme Fear': 'Extreme Angst',
+                    'Fear': 'Angst',
+                    'Neutral': 'Neutral',
+                    'Greed': 'Gier',
+                    'Extreme Greed': 'Extreme Gier'
+                };
+                const label = map[classification] || classification;
+
+                let color = '#fbbf24';
+                if (value <= 25) color = '#f87171';
+                else if (value <= 50) color = '#fbbf24';
+                else color = '#4ade80';
+
+                valueSpan.innerHTML = `<span style="color:${color}">${value} (${label})</span>`;
+            } catch (err) {
+                console.error('Fehler beim Abrufen des Fear & Greed Index:', err);
+                const valueSpan = document.getElementById('fng-value');
+                if (valueSpan) {
+                    valueSpan.textContent = 'Nicht verfügbar';
+                    valueSpan.style.color = '#999';
+                }
             }
         }
-    }
 
-    // Initial laden und dann alle 60 Sekunden aktualisieren
-    updateFearGreedIndex();
-    setInterval(updateFearGreedIndex, 60000);
-</script>
+        updateFearGreedIndex();
+        setInterval(updateFearGreedIndex, 60000);
+    </script>
 </body>
 </html>
-
-
-
-
-
