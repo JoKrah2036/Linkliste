@@ -590,5 +590,26 @@ Kryptografische Methode, mit der man etwas beweisen kann, ohne Details preiszuge
             </div>
 
 </div>
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    const impressumLink = document.getElementById('impressum-link');
+    const datenschutzLink = document.getElementById('datenschutz-link');
+
+    if (impressumLink) {
+        impressumLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.location.href = "/index.html#impressum";
+        });
+    }
+
+    if (datenschutzLink) {
+        datenschutzLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.location.href = "/index.html#datenschutz";
+        });
+    }
+});
+</script>
+
 </body>
 </html>
